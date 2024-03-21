@@ -47,7 +47,65 @@
         </div>
     </div>
     <script>
-    // Escríbe aquí tu código
+        // Escríbe aquí tu código
+        document.addEventListener('DOMContentLoaded', function () {
+            let patron = /^[A-Za-z]+$/;
+            let formulario = document.querySelector("#formulario");
+            let nombre = document.querySelector("#nombre");
+            let errorNombre = document.querySelector(".errorNombre");
+            let asunto = document.querySelector("#asunto");
+            let errorAsunto = document.querySelector(".errorAsunto");
+            let mensaje = document.querySelector("#mensaje");
+            let errorMensaje = document.querySelector(".errorMensaje");
+            let resultado = document.querySelector(".resultado");
+            let contadorCamposValidos = 0;
+
+
+
+            nombre.addEventListener('input', function () {
+                errorNombre.innerHTML = "";
+                resultado.innerHTML = "";
+            });
+
+            asunto.addEventListener('input', function () {
+                errorAsunto.innerHTML = "";
+                resultado.innerHTML = "";
+            });
+
+            mensaje.addEventListener('input', function () {
+                errorMensaje.innerHTML = "";
+                resultado.innerHTML = "";
+            });
+
+            formulario.addEventListener('submit', function (event) {
+
+                event.preventDefault();
+
+                validarInput(nombre, errorNombre, "nombre");
+                validarInput(asunto, errorAsunto, "asunto");
+                validarInput(mensaje, errorMensaje, "mensaje");
+
+                if (contadorCamposValidos === 3) {
+                    resultado.innerHTML = "Mensaje enviado con éxito";
+                } else {
+                    contadorCamposValidos = 0;
+                }
+            });
+
+
+
+            function validarInput(inputElement, pElement, elementName) {
+                if (inputElement.value.trim() === "") {
+                    pElement.innerHTML = `El ${elementName} es requerido`;
+                } else if (!patron.test(inputElement.value)) {
+                    pElement.innerHTML = `El ${elementName} solo puede contener letras`;
+                } else {
+                    contadorCamposValidos++;
+                }
+            }
+
+
+        });
     </script>
 </body>
 
