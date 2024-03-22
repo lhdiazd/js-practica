@@ -14,17 +14,17 @@
             </h2>
             <div style="display: flex;">
                 <div style="display: flex;flex-direction: column;">
-                    <button id="btn-1" style="background-color: #e53e3e; width:100px;height: 100px" type="button">
+                    <button id="btn-1" class="button" style="background-color: #e53e3e; width:100px;height: 100px" type="button">
                     </button>
-                    <button id="btn-2" style="background-color: #dd6b20; width:100px;height: 100px" type="button">
+                    <button id="btn-2" class="button" style="background-color: #dd6b20; width:100px;height: 100px" type="button">
                     </button>
-                    <button id="btn-3" style="background-color: #faf089; width:100px;height: 100px" type="button">
+                    <button id="btn-3"  class="button" style="background-color: #faf089; width:100px;height: 100px" type="button">
                     </button>
-                    <button id="btn-4" style="background-color: #48bb78; width:100px;height: 100px" type="button">
+                    <button id="btn-4" class="button" style="background-color: #48bb78; width:100px;height: 100px" type="button">
                     </button>
-                    <button id="btn-5" style="background-color: #81e6d9; width:100px;height: 100px" type="button">
+                    <button id="btn-5" class="button" style="background-color: #81e6d9; width:100px;height: 100px" type="button">
                     </button>
-                    <button id="btn-6" style="background-color: #d53f8c; width:100px;height: 100px" type="button">
+                    <button id="btn-6" class="button" style="background-color: #d53f8c; width:100px;height: 100px" type="button">
                     </button>
                 </div>
                 <div style="width: 500px;height: 600px">
@@ -35,22 +35,31 @@
         </div>
     </div>
     <script>
-        // Escríbe aquí tu código
-        let caja = document.querySelector("#caja");
-        let btn1 = document.querySelector("#btn-1");
-
-        btn1.addEventListener("click", function () {
-            changeColor(caja, "#e53e3e");
+        // Esta función se ejecuta cuando el DOM ha sido completamente cargado
+        document.addEventListener('DOMContentLoaded', function () {
+            // Seleccionar el elemento caja
+            let caja = document.querySelector("#caja");
+            // Seleccionar todos los botones por su clase
+            let buttons = document.querySelectorAll(".button");
+    
+            // Iterar sobre todos los botones
+            for (let i = 0; i < buttons.length; i++) {
+                // Agregar un evento de click a cada botón
+                buttons[i].addEventListener("click", function () {
+                    // Obtener el color de fondo del botón
+                    let color = buttons[i].style.backgroundColor;
+                    // Llamar a la función para cambiar el color de la caja
+                    changeColor(caja, color);
+                });
+            }
+    
+            // Función para cambiar el color de fondo de la caja
+            function changeColor(element, color) {
+                element.style.backgroundColor = color;
+            }
         });
-
-
-        
-
-        function changeColor(element, color) {
-            element.style.backgroundColor = color;
-        }
-
     </script>
+    
 </body>
 
 </html>

@@ -47,10 +47,13 @@
         </div>
     </div>
     <script>
-        // Escríbe aquí tu código
+        // Esta función se ejecuta cuando el DOM ha sido completamente cargado
         document.addEventListener('DOMContentLoaded', function () {
+            // Expresión regular para validar que solo se ingresen letras
             let patron = /^[A-Za-z]+$/;
+            // Seleccionar el formulario por su id
             let formulario = document.querySelector("#formulario");
+            // Seleccionar los elementos del formulario por id
             let nombre = document.querySelector("#nombre");
             let errorNombre = document.querySelector(".errorNombre");
             let asunto = document.querySelector("#asunto");
@@ -58,33 +61,38 @@
             let mensaje = document.querySelector("#mensaje");
             let errorMensaje = document.querySelector(".errorMensaje");
             let resultado = document.querySelector(".resultado");
+            // Contador para mantener un seguimiento de los campos válidos
             let contadorCamposValidos = 0;
 
-
-
+            // Función que se ejecuta cada vez que se escribe en el campo de nombre
             nombre.addEventListener('input', function () {
                 errorNombre.innerHTML = "";
                 resultado.innerHTML = "";
             });
 
+            // Función que se ejecuta cada vez que se escribe en el campo de asunto
             asunto.addEventListener('input', function () {
                 errorAsunto.innerHTML = "";
                 resultado.innerHTML = "";
             });
 
+            // Función que se ejecuta cada vez que se escribe en el campo de mensaje
             mensaje.addEventListener('input', function () {
                 errorMensaje.innerHTML = "";
                 resultado.innerHTML = "";
             });
 
+            // Función que se ejecuta cuando se envía el formulario
             formulario.addEventListener('submit', function (event) {
-
+                // Evitar el comportamiento predeterminado de envío del formulario
                 event.preventDefault();
 
+                // Validar los campos del formulario
                 validarInput(nombre, errorNombre, "nombre");
                 validarInput(asunto, errorAsunto, "asunto");
                 validarInput(mensaje, errorMensaje, "mensaje");
 
+                // Mostrar mensaje de éxito si todos los campos son válidos
                 if (contadorCamposValidos === 3) {
                     resultado.innerHTML = "Mensaje enviado con éxito";
                 } else {
@@ -92,19 +100,18 @@
                 }
             });
 
-
-
+            // Función para validar los campos del formulario
             function validarInput(inputElement, pElement, elementName) {
+                // Verificar si el campo está vacío
                 if (inputElement.value.trim() === "") {
                     pElement.innerHTML = `El ${elementName} es requerido`;
-                } else if (!patron.test(inputElement.value)) {
+                } else if (!patron.test(inputElement.value)) { // Verificar si el campo contiene solo letras
                     pElement.innerHTML = `El ${elementName} solo puede contener letras`;
                 } else {
+                    // Incrementar el contador de campos válidos si el campo es válido
                     contadorCamposValidos++;
                 }
             }
-
-
         });
     </script>
 </body>

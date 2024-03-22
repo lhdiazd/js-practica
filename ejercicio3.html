@@ -35,7 +35,56 @@
         </div>
     </div>
     <script>
-    // Escríbe aquí tu código
+        // Script para la funcionalidad de suma y resta
+        document.addEventListener('DOMContentLoaded', function () {
+            // Seleccionar elementos necesarios
+            let resultado = document.querySelector(".resultado");
+            let valor1 = document.querySelector("#valor1");
+            let valor2 = document.querySelector("#valor2");
+            let btnSumar = document.querySelector("#btn-sumar");
+            let btnRestar = document.querySelector("#btn-restar");
+            // Expresión regular para validar números enteros positivos
+            let patronNumerico = /^\d+$/;
+
+            // Función para validar si el valor ingresado es un número válido
+            function validarNum(valor) {
+                return (valor.value !== "" && patronNumerico.test(valor.value));
+            }
+
+          
+            btnSumar.addEventListener("click", function () {
+                if (validarNum(valor1) && validarNum(valor2)) {
+                    // Realizar la suma si ambos valores son válidos
+                    let resultadoSuma = parseInt(valor1.value) + parseInt(valor2.value);
+                    resultado.innerHTML = resultadoSuma;
+                } else {
+                    // Mostrar alerta si uno o ambos valores no son válidos
+                    alert("Ingrese valores numéricos válidos");
+                    resultado.innerHTML = "";
+                }
+
+            });
+
+            btnRestar.addEventListener("click", function () {
+                if (validarNum(valor1) && validarNum(valor2)) {
+                    // Realizar la resta si ambos valores son válidos
+                    let resultadoResta = parseInt(valor1.value) - parseInt(valor2.value);
+                    // Manejar resultados negativos
+                    if(resultadoResta < 0){
+                        resultado.innerHTML = 0;
+                    }else {
+                        resultado.innerHTML = resultadoResta;
+                    }
+                    
+                } else {
+                    // Mostrar alerta si uno o ambos valores no son válidos
+                    alert("Ingrese valores numéricos válidos");
+                    resultado.innerHTML = 0;
+                }
+
+            });
+
+        });
     </script>
 </body>
 
